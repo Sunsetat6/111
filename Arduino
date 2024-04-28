@@ -1,0 +1,49 @@
+#include <MKRWAN.h>
+
+LoRaModem modem;
+String appEui = SECRET_APP_EUI;
+String appKey = SECRET_APP_KEY;
+
+int posX = 0; // Starting X position
+int posY = 0; // Starting Y position
+
+void setup() {
+  Serial.begin(115200);
+  while (!Serial); // Wait for console to connect
+  if (!modem.begin(EU868)) {
+    Serial.println("Failed to start module");
+    while (1) {}
+  };
+  Serial.println("Module started");
+  
+  int connected = modem.joinOTAA(appEui, appKey);
+  if (!connected) {
+    Serial.println("Joining failed");
+    while (1) {}
+  }
+
+  modem.minPollInterval(10); // Set polling interval to 10 seconds
+}
+
+void loop() {
+  // Simulate animal movement with smaller and more realistic changes
+  int moveX = random(-30, 30); // Animal can move up to 30 units left/right
+  int moveY = random(-30, 30); // Animal can move up to 30 units up/down
+
+  posX += moveX;
+  posY += moveY;
+
+  posX = constrain(posX, -250, 250);
+  posY = constrain(posY, -250, 250);
+
+  String msg = "AnimalName:" + String(posX) + ":" + String(posY);
+
+  modem.beginPacket();
+  modem.print(msg);
+  if (modem.endPacket(true) > 0) {
+    Serial.println("Message sent: " + msg);
+  } else {
+    Serial.println("Error sending message");
+  }
+  delay(10000); // Send a new position every 10 seconds
+}
