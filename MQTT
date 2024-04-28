@@ -1,0 +1,17 @@
+import paho.mqtt.client as mqtt
+import json
+
+def on_message(client, userdata, message):
+    msg_payload = str(message.payload.decode("utf-8"))
+    print("Received message: ", msg_payload)
+    # Process message, e.g., extract X, Y coordinates
+    data = json.loads(msg_payload)
+    # Here you can add code to process data
+
+client = mqtt.Client("ClientID")
+client.connect("srv-lora.isep.fr")  # Connect to the MQTT broker
+
+client.subscribe("emulateur_colliers")  # Subscribe to the topic
+client.on_message = on_message  # Assign the message processing function
+
+client.loop_forever()  # Start the loop to listen for incoming messages
