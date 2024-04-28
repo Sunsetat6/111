@@ -31,13 +31,3 @@ client.on_message = on_message
 
 turtle.mainloop()  # Start Turtle graphics
 client.loop_start()  # Start the MQTT client in a background thread
-
-
-3. Functional dashboard showing real-time data and alerts (Task 3)
-Basic version: Implemented using Python's Turtle graphics library, which also needs to be run in an environment that supports Python, usually a personal computer.
-Advanced version: If you choose to develop a web version of the dashboard, you may need a web server to host and run the front-end HTML/CSS/JavaScript code, and the back-end (may use Node.js, Python Flask/Django, etc.) also needs to be in Run in an environment capable of handling HTTP requests.
-Overall structure
-Arduino MKRWAN card: generates data and sends it via LoRa.
-LoRa Gateway: Receives LoRa messages from the Arduino card and forwards them to the MQTT server.
-MQTT server: processes and forwards messages. This can be a public MQTT service, or a server you build yourself.
-Data processing and dashboard application: runs on a PC or server, listens to MQTT messages, processes data, and displays it on the dashboard.
