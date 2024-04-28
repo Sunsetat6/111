@@ -1,5 +1,5 @@
-3. 功能仪表板显示实时数据和警报（Task 3）
-创建一个基本的仪表板，使用Python的Turtle图形库显示动物位置，并打印警报消息。
+3. Functional dashboard showing real-time data and alerts (Task 3)
+Create a basic dashboard that displays animal locations and prints alert messages using Python's Turtle graphics library.
 
 import turtle
 import json
@@ -33,11 +33,11 @@ turtle.mainloop()  # Start Turtle graphics
 client.loop_start()  # Start the MQTT client in a background thread
 
 
-3. 功能仪表板显示实时数据和警报（Task 3）
-基础版本：使用Python的Turtle图形库来实现，同样需要在支持Python的环境中运行，通常是个人电脑。
-进阶版本：如果选择开发网页版的仪表板，你可能需要一个网页服务器来托管和运行前端HTML/CSS/JavaScript代码，并且后端（可能使用Node.js, Python Flask/Django等）也需要在能够处理HTTP请求的环境中运行。
-整体架构
-Arduino MKRWAN卡：生成数据，并通过LoRa发送。
-LoRa网关：接收来自Arduino卡的LoRa消息，并将其转发到MQTT服务器。
-MQTT服务器：处理和转发消息。这可以是一个公共的MQTT服务，或者你自己搭建的服务器。
-数据处理和仪表板应用：在个人电脑或服务器上运行，监听MQTT消息，处理数据，并显示在仪表板上。
+3. Functional dashboard showing real-time data and alerts (Task 3)
+Basic version: Implemented using Python's Turtle graphics library, which also needs to be run in an environment that supports Python, usually a personal computer.
+Advanced version: If you choose to develop a web version of the dashboard, you may need a web server to host and run the front-end HTML/CSS/JavaScript code, and the back-end (may use Node.js, Python Flask/Django, etc.) also needs to be in Run in an environment capable of handling HTTP requests.
+Overall structure
+Arduino MKRWAN card: generates data and sends it via LoRa.
+LoRa Gateway: Receives LoRa messages from the Arduino card and forwards them to the MQTT server.
+MQTT server: processes and forwards messages. This can be a public MQTT service, or a server you build yourself.
+Data processing and dashboard application: runs on a PC or server, listens to MQTT messages, processes data, and displays it on the dashboard.
