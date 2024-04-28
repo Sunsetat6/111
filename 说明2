@@ -1,0 +1,23 @@
+2. 成功通过LoRa进行数据传输并设置MQTT（Task 2）
+使用MQTT协议接收从Arduino通过LoRa发送的数据。以下是这个任务的实现代码：
+import paho.mqtt.client as mqtt
+import json
+
+def on_message(client, userdata, message):
+    msg_payload = str(message.payload.decode("utf-8"))
+    print("Received message: ", msg_payload)
+    # Process message, e.g., extract X, Y coordinates
+    data = json.loads(msg_payload)
+    # Here you can add code to process data
+
+client = mqtt.Client("ClientID")
+client.connect("srv-lora.isep.fr")  # Connect to the MQTT broker
+
+client.subscribe("emulateur_colliers")  # Subscribe to the topic
+client.on_message = on_message  # Assign the message processing function
+
+client.loop_forever()  # Start the loop to listen for incoming messages
+
+
+2. 成功通过LoRa进行数据传输并设置MQTT（Task 2）
+这部分代码主要在一个支持Python的环境中运行，可以是你的个人电脑、服务器或任何安装了Python和必要库（如paho-mqtt）的设备。这里的代码主要作用是监听MQTT主题，接收从LoRa网络通过MQTT桥接的数据。
