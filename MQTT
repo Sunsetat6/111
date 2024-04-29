@@ -8,7 +8,7 @@ def on_message(client, userdata, message):
     data = json.loads(msg_payload)
     # Here you can add code to process data
 
-client = mqtt.Client("ClientID")
+client = mqtt.Client("666")
 client.connect("srv-lora.isep.fr")  # Connect to the MQTT broker
 
 client.subscribe("emulateur_colliers")  # Subscribe to the topic
