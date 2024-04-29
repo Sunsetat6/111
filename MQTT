@@ -7,7 +7,7 @@ def on_message(client, userdata, message):
     # Process message, e.g., extract X, Y coordinates
     data = json.loads(msg_payload)
     
-client = mqtt.Client("666")
+client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, "666")
 client.connect("srv-lora.isep.fr")  # Connect to the MQTT broker
 
 client.subscribe("emulateur_colliers")  # Subscribe to the topic
