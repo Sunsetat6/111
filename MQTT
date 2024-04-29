@@ -6,8 +6,7 @@ def on_message(client, userdata, message):
     print("Received message: ", msg_payload)
     # Process message, e.g., extract X, Y coordinates
     data = json.loads(msg_payload)
-    # Here you can add code to process data
-
+    
 client = mqtt.Client("666")
 client.connect("srv-lora.isep.fr")  # Connect to the MQTT broker
 
