@@ -1,8 +1,8 @@
 #include <MKRWAN.h>
 
 LoRaModem modem;
-String appEui = SECRET_APP_EUI;
-String appKey = SECRET_APP_KEY;
+String appEui = a8610a3435267010;
+String appKey = 02020202020202020202020202020202;
 
 int posX = 0; // Starting X position
 int posY = 0; // Starting Y position
