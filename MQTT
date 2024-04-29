@@ -1,16 +1,48 @@
 import paho.mqtt.client as mqtt
+import turtle
 import json
 
-def on_message(client, userdata, message):
-    msg_payload = str(message.payload.decode("utf-8"))
-    print("Received message: ", msg_payload)
-    # Process message, e.g., extract X, Y coordinates
-    data = json.loads(msg_payload)
-    
+
 client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, "666")
-client.connect("srv-lora.isep.fr")  # Connect to the MQTT broker
+client.connect("srv-lora.isep.fr")
 
-client.subscribe("emulateur_colliers")  # Subscribe to the topic
-client.on_message = on_message  # Assign the message processing function
+turtle.speed(1) 
+turtle.up()  
 
-client.loop_forever()  # Start the loop to listen for incoming messages
+def on_message_callback(client_inst, userdata, message):
+    valeur = message.payload.decode("utf-8")
+    print(message.topic + " " + valeur)
+    # Command to end the program
+    if valeur == "fin":
+        turtle.bye()
+        client.disconnect()  
+        exit()
+    # Command to update position
+    elif valeur[0] == "p":
+        try:
+            xy = valeur.split(":")
+            x, y = int(xy[1]), int(xy[2])
+            turtle.goto(x, y)
+             # Check if the position is outside the safe zone
+            if x < -200 or x > 200 or y < -200 or y > 200:
+                print(f"Alert: Animal out of bounds at ({x}, {y})")
+        except Exception as e:
+            print(f"Error in position update - {e}")
+    # Command to change color
+    elif valeur[0] == "c":
+        try:
+            couleur = valeur.split(":")[1]
+            turtle.color(couleur)
+        except Exception as e:
+            print(f"Error in color change - {e}")
+    else:
+        print("Error: Unknown command...")
+
+
+client.on_message = on_message_callback
+
+client.subscribe("#")
+
+client.loop_start()
+
+turtle.mainloop()
