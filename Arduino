@@ -33,8 +33,8 @@ void loop() {
   posX += moveX;
   posY += moveY;
 
-  posX = constrain(posX, -250, 250);
-  posY = constrain(posY, -250, 250);
+  posX = constrain(posX, -200, 200);
+  posY = constrain(posY, -200, 200);
 
   String msg = "AnimalName:" + String(posX) + ":" + String(posY);
 
